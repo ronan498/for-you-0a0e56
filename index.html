@@ -1,62 +1,39 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<!-- Unlisted: discourage search engines from indexing this personal page. -->
+<!-- Unlisted: keep this personal page out of search engines. -->
 <meta name="robots" content="noindex, nofollow" />
 <title>For you</title>
-<meta name="description" content="A little something." />
+<meta name="description" content="A little something, every morning." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>" />
 <link rel="stylesheet" href="styles.css" />
 
-<!-- ============================================================
-     Reusable illustration symbols (roses + leaves).
-     Instanced with <use> so the whole scene is one flat world.
-     ============================================================ -->
+<!-- reusable rose + leaf illustrations, instanced with <use> -->
 <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
   <defs>
     <linearGradient id="petalGrad" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="#a51f45" />
-      <stop offset="55%" stop-color="#d83f66" />
-      <stop offset="100%" stop-color="#ff7e9d" />
+      <stop offset="0%" stop-color="#a51f45" /><stop offset="55%" stop-color="#d83f66" /><stop offset="100%" stop-color="#ff7e9d" />
     </linearGradient>
     <linearGradient id="petalGradInner" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="#c22e57" />
-      <stop offset="100%" stop-color="#ff9cb4" />
+      <stop offset="0%" stop-color="#c22e57" /><stop offset="100%" stop-color="#ff9cb4" />
     </linearGradient>
     <linearGradient id="leafGrad" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0%" stop-color="#2f6b46" />
-      <stop offset="100%" stop-color="#5fa877" />
+      <stop offset="0%" stop-color="#2f6b46" /><stop offset="100%" stop-color="#5fa877" />
     </linearGradient>
-
-    <!-- one petal, pointing up from center -->
     <path id="petal" d="M50 50 C 37 31, 41 9, 50 6 C 59 9, 63 31, 50 50 Z" />
-
-    <!-- a full top-view rose bloom -->
     <g id="rose">
-      <!-- outer ring: 8 petals -->
       <g fill="url(#petalGrad)">
-        <use href="#petal" transform="rotate(0 50 50)" />
-        <use href="#petal" transform="rotate(45 50 50)" />
-        <use href="#petal" transform="rotate(90 50 50)" />
-        <use href="#petal" transform="rotate(135 50 50)" />
-        <use href="#petal" transform="rotate(180 50 50)" />
-        <use href="#petal" transform="rotate(225 50 50)" />
-        <use href="#petal" transform="rotate(270 50 50)" />
-        <use href="#petal" transform="rotate(315 50 50)" />
+        <use href="#petal" transform="rotate(0 50 50)" /><use href="#petal" transform="rotate(45 50 50)" />
+        <use href="#petal" transform="rotate(90 50 50)" /><use href="#petal" transform="rotate(135 50 50)" />
+        <use href="#petal" transform="rotate(180 50 50)" /><use href="#petal" transform="rotate(225 50 50)" />
+        <use href="#petal" transform="rotate(270 50 50)" /><use href="#petal" transform="rotate(315 50 50)" />
       </g>
-      <!-- inner ring: 5 smaller petals, offset -->
       <g fill="url(#petalGradInner)" transform="translate(50 50) scale(0.62) translate(-50 -50)">
-        <use href="#petal" transform="rotate(22 50 50)" />
-        <use href="#petal" transform="rotate(94 50 50)" />
-        <use href="#petal" transform="rotate(166 50 50)" />
-        <use href="#petal" transform="rotate(238 50 50)" />
+        <use href="#petal" transform="rotate(22 50 50)" /><use href="#petal" transform="rotate(94 50 50)" />
+        <use href="#petal" transform="rotate(166 50 50)" /><use href="#petal" transform="rotate(238 50 50)" />
         <use href="#petal" transform="rotate(310 50 50)" />
       </g>
-      <!-- center coil -->
-      <circle cx="50" cy="50" r="9" fill="#8f1a3c" />
-      <circle cx="50" cy="50" r="4.5" fill="#c22e57" />
-      <circle cx="48.5" cy="48.5" r="1.6" fill="#ff9cb4" />
+      <circle cx="50" cy="50" r="9" fill="#8f1a3c" /><circle cx="50" cy="50" r="4.5" fill="#c22e57" /><circle cx="48.5" cy="48.5" r="1.6" fill="#ff9cb4" />
     </g>
-
     <g id="leaf">
       <path d="M50 6 C 74 20, 74 62, 50 94 C 26 62, 26 20, 50 6 Z" fill="url(#leafGrad)" />
       <path d="M50 12 L50 88" stroke="#28583a" stroke-width="2.4" fill="none" stroke-linecap="round" />
@@ -71,64 +48,44 @@
     <div class="petals" id="driftPetals"></div>
   </div>
 
-  <!-- EDIT ME: name + message ------------------------------------------------ -->
-  <header class="message" id="message">
+  <!-- EDIT ME: the words at the top ---------------------------------------- -->
+  <header class="intro">
     <h1 class="title">For you.</h1>
-    <p class="subtitle">Roses, boba, and yes, pineapple on pizza. Tap the box to open it.</p>
+    <p class="subtitle">A little something to open each morning, until I am there with you.</p>
+    <p class="countdown" id="countdown"></p>
   </header>
-  <!-- /EDIT ME --------------------------------------------------------------- -->
+  <!-- /EDIT ME -------------------------------------------------------------- -->
 
-  <div class="scene" id="scene">
-    <!-- back props -->
+  <section class="calendar-wrap">
     <div class="prop prop--boba" aria-hidden="true">
       <svg viewBox="0 0 120 200">
-        <!-- straw -->
         <rect x="70" y="6" width="13" height="150" rx="6" transform="rotate(9 76 80)" fill="#f4a6bd" />
         <rect x="70" y="6" width="4.5" height="150" rx="3" transform="rotate(9 76 80)" fill="#ffd0dd" opacity=".6" />
-        <!-- dome lid -->
         <path d="M20 44 Q60 16 100 44 Z" fill="#cfe0e6" />
         <ellipse cx="60" cy="44" rx="40" ry="7" fill="#e8f1f4" />
-        <!-- cup -->
         <path d="M22 46 L98 46 L90 190 Q60 200 30 190 Z" fill="#f3ede4" opacity=".55" />
-        <!-- brown sugar tea -->
         <path d="M24 60 L96 60 L89 188 Q60 197 31 188 Z" fill="#b06a2e" />
         <path d="M24 60 L96 60 L94 92 L26 92 Z" fill="#c98545" opacity=".8" />
-        <!-- tiger-stripe drizzle -->
         <path d="M30 96 q6 14 -2 30 q10 12 4 34" stroke="#6e3d16" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8" />
         <path d="M88 100 q-6 16 2 32 q-8 14 -2 32" stroke="#6e3d16" stroke-width="4" fill="none" stroke-linecap="round" opacity=".75" />
-        <!-- tapioca pearls -->
         <g fill="#3a2412">
           <circle cx="40" cy="176" r="7" /><circle cx="56" cy="181" r="7.5" /><circle cx="72" cy="177" r="7" />
-          <circle cx="48" cy="167" r="6.5" /><circle cx="65" cy="169" r="6.5" /><circle cx="80" cy="180" r="6" />
-          <circle cx="34" cy="184" r="5.5" />
+          <circle cx="48" cy="167" r="6.5" /><circle cx="65" cy="169" r="6.5" /><circle cx="80" cy="180" r="6" /><circle cx="34" cy="184" r="5.5" />
         </g>
-        <ellipse cx="45" cy="173" rx="2.2" ry="1.6" fill="#7a5a3f" opacity=".8" />
       </svg>
     </div>
-
     <div class="prop prop--pizza" aria-hidden="true">
       <svg viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="92" fill="#e0a95a" />
-        <circle cx="100" cy="100" r="80" fill="#f1c777" />
-        <circle cx="100" cy="100" r="72" fill="#f6d98a" />
-        <!-- ham -->
+        <circle cx="100" cy="100" r="92" fill="#e0a95a" /><circle cx="100" cy="100" r="80" fill="#f1c777" /><circle cx="100" cy="100" r="72" fill="#f6d98a" />
         <g fill="#e26d84">
           <path d="M70 66 q14 -8 24 2 q6 12 -6 18 q-16 4 -22 -8 q-2 -8 4 -12Z" />
           <path d="M120 92 q13 -6 20 4 q4 12 -8 15 q-14 2 -18 -9 q-1 -7 6 -10Z" />
           <path d="M78 122 q13 -6 20 4 q4 12 -8 15 q-14 2 -18 -9 q-1 -7 6 -10Z" />
         </g>
-        <g fill="#c25068" opacity=".55">
-          <ellipse cx="82" cy="74" rx="6" ry="4" /><ellipse cx="130" cy="100" rx="5" ry="4" /><ellipse cx="88" cy="130" rx="5" ry="4" />
-        </g>
-        <!-- pineapple -->
         <g fill="#ffd83b">
           <path d="M118 62 l12 5 l-4 12 l-12 -3Z" /><path d="M142 118 l12 4 l-5 12 l-11 -3Z" />
           <path d="M62 100 l12 4 l-5 12 l-11 -3Z" /><path d="M104 138 l12 4 l-5 12 l-11 -3Z" />
         </g>
-        <g fill="#f2b90c" opacity=".8">
-          <path d="M120 66 l7 3 M124 70 l6 2" stroke="#f2b90c" stroke-width="1.4" />
-        </g>
-        <!-- basil flecks -->
         <g fill="#4f9160">
           <ellipse cx="100" cy="86" rx="4" ry="2.6" transform="rotate(30 100 86)" />
           <ellipse cx="112" cy="128" rx="3.6" ry="2.4" transform="rotate(-20 112 128)" />
@@ -137,17 +94,21 @@
       </svg>
     </div>
 
-    <!-- THE GIFT ------------------------------------------------------------- -->
+    <ul class="calendar" id="calendar"><!-- days rendered by script.js --></ul>
+  </section>
+</main>
+
+<!-- the reveal overlay, reused for whichever day is opened -->
+<div class="reveal" id="reveal" role="dialog" aria-modal="true" aria-label="Your video" hidden>
+  <div class="reveal__scrim" id="scrim"></div>
+  <div class="reveal__inner">
+    <p class="reveal__label" id="revealLabel"></p>
+
     <div class="gift" id="gift">
-      <div class="gift__floor" aria-hidden="true"></div>
-      <div class="gift__burst" aria-hidden="true"></div>
       <div class="gift__glow" aria-hidden="true"></div>
-
+      <div class="gift__burst" aria-hidden="true"></div>
       <div class="box">
-        <!-- inside / back wall -->
         <div class="box__inside" aria-hidden="true"></div>
-
-        <!-- roses that spring up on open -->
         <div class="box__roses" aria-hidden="true">
           <svg class="leaf leaf--a"><use href="#leaf" /></svg>
           <svg class="leaf leaf--b"><use href="#leaf" /></svg>
@@ -159,43 +120,25 @@
           <svg class="rose rose--6"><use href="#rose" /></svg>
           <svg class="rose rose--7"><use href="#rose" /></svg>
         </div>
-
-        <!-- the magic screen that rises from inside -->
-        <div class="screen" id="screen" aria-hidden="true">
+        <div class="screen" id="screen">
           <div class="screen__frame">
-            <video id="giftVideo" class="screen__video" playsinline preload="metadata">
-              <source src="assets/message.mp4" type="video/mp4" />
-            </video>
-            <div class="screen__placeholder" id="placeholder">
-              <span class="screen__placeholder-mark">🎬</span>
-              <span class="screen__placeholder-text">Your video will play here</span>
-              <span class="screen__placeholder-hint">drop <code>message.mp4</code> into <code>/assets</code></span>
+            <video id="giftVideo" class="screen__video" playsinline preload="metadata"></video>
+            <div class="screen__placeholder">
+              <span class="screen__placeholder-mark">🤍</span>
+              <span class="screen__placeholder-text" id="placeholderText">opening&hellip;</span>
             </div>
           </div>
         </div>
-
-        <!-- front face of the box (hides the base of the screen) -->
-        <div class="box__front" aria-hidden="true">
-          <span class="ribbon ribbon--v"></span>
-        </div>
-
-        <!-- lid that lifts off -->
+        <div class="box__front" aria-hidden="true"><span class="ribbon ribbon--v"></span></div>
         <div class="box__lid" id="lid" aria-hidden="true">
           <span class="ribbon ribbon--lid"></span>
-          <span class="bow">
-            <span class="bow__loop bow__loop--l"></span>
-            <span class="bow__loop bow__loop--r"></span>
-            <span class="bow__knot"></span>
-          </span>
+          <span class="bow"><span class="bow__loop bow__loop--l"></span><span class="bow__loop bow__loop--r"></span><span class="bow__knot"></span></span>
         </div>
       </div>
-
-      <button class="gift__hit" id="hit" type="button" aria-label="Open your gift"></button>
-      <span class="hint" id="hint">tap to open</span>
     </div>
-  </div>
 
-  <button class="reset" id="reset" type="button" hidden>close the box</button>
-</main>
+    <button class="reset" id="reset" type="button">close</button>
+  </div>
+</div>
 
 <script src="script.js"></script>

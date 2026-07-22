@@ -1,26 +1,30 @@
 # For you 🌹
 
-A tiny one-page surprise: a box of roses (with a brown sugar boba and a
-pineapple-and-ham pizza staged behind it) that opens when you tap it and
-plays a video inside.
+A nine-day countdown to New York. Each morning a new gift unlocks; tapping
+it opens a box of roses and plays that day's video. A brown sugar boba and a
+pineapple-and-ham pizza sit in the background. Days that haven't arrived yet
+stay locked; past days can be rewatched.
 
-## Add the video
-Drop your clip into [`assets/`](assets/) named `message.mp4`. See
-[`assets/README.md`](assets/README.md).
+**Live:** https://ronan498.github.io/for-you-0a0e56/
 
-## Run it locally
-It is plain HTML/CSS/JS, no build step. Any static server works:
+## Add a day
+    ./add-day.sh <dayNumber> <path/to/video>
+    ./add-day.sh 2 ~/Desktop/IMG_5630.MOV
 
-    python3 -m http.server 8000
-    # then open http://localhost:8000
+Converts the clip to a phone-friendly `.mp4`, saves it as `assets/dayN.mp4`,
+and pushes it live. See [`assets/README.md`](assets/README.md).
 
-(Opening `index.html` directly works too, but a local server is closer to
-how it runs live.)
+## Change the schedule or words
+- **Dates / video slots:** the `DAYS` array and `ARRIVAL` at the top of
+  [`script.js`](script.js).
+- **Headline + subtitle:** the block marked `EDIT ME` in
+  [`index.html`](index.html).
 
-## Edit the words
-The name and message live in `index.html`, in the block marked
-`EDIT ME`. Change two lines, done.
+## How the unlocking works
+Each day has a date. A day is openable once the viewer's own local date has
+reached it, so it flips open at midnight in her timezone. No server needed.
 
-## Privacy
-This is set up as an *unlisted* page: `noindex` + `robots.txt` keep it out
-of search engines. Anyone with the exact link can still view it.
+## Notes
+- Plain HTML/CSS/JS, no build step. Run locally with `python3 -m http.server`.
+- Unlisted: `noindex` keeps it out of search engines; the repo is public
+  only because free GitHub Pages requires it.

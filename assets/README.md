@@ -1,15 +1,30 @@
-# Drop your video here
+# The daily videos
 
-Put your clip in this folder named exactly:
+Each day of the countdown plays one file:
 
-    message.mp4
+    assets/day1.mp4   (Wed Jul 22)
+    assets/day2.mp4   (Thu Jul 23)
+    ...
+    assets/day9.mp4   (Thu Jul 30)
 
-That is it. The box will play it when she opens it.
+A day stays locked until its date arrives (in her local time), so a new
+one is waiting when she wakes up. `day1.mp4` is already in place.
 
-Tips:
-- A vertical (phone) video looks best, but the frame adapts to any shape.
-- Keep it under ~50 MB so it loads fast (GitHub blocks files over 100 MB).
-- H.264 / AAC `.mp4` plays everywhere. Most phone recordings already are.
+## Easiest way to add a day
+From the project folder:
 
-After you add the file, it needs to be committed and pushed for the live
-site to show it. Just say the word and I will push it for you.
+    ./add-day.sh 2 ~/Desktop/IMG_5630.MOV
+
+That shrinks your clip to a phone-friendly `.mp4`, saves it as
+`assets/day2.mp4`, and pushes it live (about 30 seconds later).
+
+Raw `.MOV` files are ignored by git on purpose (they are huge and some
+browsers cannot play them), so always let the script convert them.
+
+## Or just hand it to me
+Tell me "day 3 is ready, it's IMG_5631.MOV" and I will convert and push it.
+
+## Notes
+- iPhone clips are often HEVC/4K, which Android and Chrome may refuse to
+  play. The conversion fixes that and drops an 80 MB clip to ~15 MB.
+- Keep the finished `.mp4` under 100 MB (GitHub's hard limit).
